@@ -6,6 +6,7 @@ import { ButtonIcon } from '../../components/ButtonIcon';
 import IllustrationImg from '../../assets/illustration.png';
 
 import { styles } from './styles';
+import { Background } from '../../components/Background';
 
 
 export function SignIn() {
@@ -16,31 +17,33 @@ export function SignIn() {
   }
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={IllustrationImg}
-        style={styles.image}
-        resizeMode="stretch"
-      />
-
-      <View style={styles.content}>
-        <Text style={styles.title}>
-          Conect {'\n'}
-          and Organize {'\n'}
-          Your Games
-        </Text>
-
-        <Text style={styles.subtitle}>
-          Get groups to play your favorite{'\n'}
-          games with your friends
-        </Text>
-
-        <ButtonIcon
-          title="Enter with Discord"
-          onPress={handleSignIn}
+    <Background>
+      <View style={styles.container}>
+        <Image
+          source={IllustrationImg}
+          style={styles.image}
+          resizeMode="stretch"
         />
 
+        <View style={styles.content}>
+          <Text style={styles.title}>
+            Conect {'\n'}
+            and Organize {'\n'}
+            Your Games
+          </Text>
+
+          <Text style={styles.subtitle}>
+            Get groups to play your favorite{'\n'}
+            games with your friends
+          </Text>
+
+          <ButtonIcon
+            title="Enter with Discord"
+            onPress={handleSignIn}
+          />
+
+        </View>
       </View>
-    </View>
+    </Background>
   );
 }
