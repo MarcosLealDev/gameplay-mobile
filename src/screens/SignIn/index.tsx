@@ -1,19 +1,25 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { Text, View, Image, Alert, ActivityIndicator } from 'react-native';
 
 import { ButtonIcon } from '../../components/ButtonIcon';
+import { Background } from '../../components/Background';
 import IllustrationImg from '../../assets/illustration.png';
 
+import { useAuth } from '../../hooks/auth';
+
 import { styles } from './styles';
-import { Background } from '../../components/Background';
+import { theme } from '../../global/styles/theme';
 
 
 export function SignIn() {
-  const navigation = useNavigation();
+  const { loading, signIn } = useAuth()
 
-  function handleSignIn() {
-    navigation.navigate('Home');
+  async function handleSignIn() {
+    try {
+      await signIn()
+    } catch (error) {
+      Alert.alert(error);
+    }
   }
 
   return (
@@ -37,10 +43,13 @@ export function SignIn() {
             games with your friends
           </Text>
 
-          <ButtonIcon
-            title="Enter with Discord"
-            onPress={handleSignIn}
-          />
+          {
+            loading ? <ActivityIndicator color={theme.colors.primary} /> :
+              <ButtonIcon
+                title="Enter with Discord"
+                onPress={handleSignIn}
+              />
+          }
 
         </View>
       </View>
