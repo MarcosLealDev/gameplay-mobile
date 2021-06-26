@@ -14,8 +14,28 @@ import { ListHeader } from '../../components/ListHeader';
 import { Member } from '../../components/Member';
 import { ListDivider } from '../../components/ListDivider';
 import { ButtonIcon } from '../../components/ButtonIcon';
+import { useRoute } from '@react-navigation/native';
+import { AppointmentProps } from '../../components/Appointment';
+import { api } from '../../services/api';
+
+type Params = {
+  guildSelected: AppointmentProps
+}
 
 export function AppointmentDetails() {
+  const route = useRoute();
+  const { guildSelected } = route.params as Params;
+
+  async function fetchGuildInfo() {
+    try {
+      const response = await api.get(`/guilds/${guildSelected.guild.id}`)
+
+    } catch (error) {
+
+    }
+  }
+
+
   const members = [
     {
       id: '1',
@@ -50,18 +70,18 @@ export function AppointmentDetails() {
       >
         <View style={styles.bannerContent}>
           <Text style={styles.title}>
-            LendLand
+            {guildSelected.guild.name}
           </Text>
 
           <Text style={styles.subtitle}>
-            Texto da hora ! Tudo pra descrever isto aqui !
+            {guildSelected.description}
           </Text>
         </View>
       </ImageBackground>
 
       <ListHeader
         title="Players"
-        subtitle="Total 3"
+        subtitle={`Total 3`}
       />
 
       <FlatList
